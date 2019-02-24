@@ -62,8 +62,51 @@ def greedy_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    
+    # keep track of current trip 
+    current_trip = []
+    # keep track of current space available
+    current_space_remaining = limit 
+
+    # keep track of total trips 
+    total_trips = []
+    # keep track of name of all cows that are already fitted 
+    total_cows = []
+
+    # while not all cows are transported
+    while len(total_cows) < len(cows):
+        # keeps track of current cow that should be fitted
+        cow_size = 0 
+        cow_name = ''
+
+        for name, weight in cows.items():
+            # if the cow weight is greater than the current max size and still lesser than the 
+            # remaining space, and the cow has not been fitted in a trip, 
+            # the current cow to be fitted will be of cow name 
+            if (weight > cow_size and weight <= current_space_remaining):
+                if (name in total_cows):
+                    continue 
+                else:    
+                    cow_size = weight 
+                    cow_name = name 
+
+        # if there is a cow that can be fitted 
+        if cow_name:
+            current_space_remaining -= cow_size
+            current_trip.append(cow_name)
+            total_cows.append(cow_name)
+
+        else:
+            # add current trip to total trips and reset current trip and space remaining
+            total_trips.append(current_trip)
+            current_trip = []
+            current_space_remaining = limit 
+
+    # appends last trip  
+    total_trips.append(current_trip)
+    # when all cows all assigned on a trip with the greedy algorithm, 
+    return total_trips    
+
 
 # Problem 3
 def brute_force_cow_transport(cows,limit=10):
