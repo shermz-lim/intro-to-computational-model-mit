@@ -130,9 +130,18 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    # brute force implementation with memoization 
+    # recursion - split bigger list into two smaller lists (generate partition that has a length of 
+    # 2 ) with one of the list that's able to satisfy the weight limit. If both lists 
+    # can satisfy limit, algorithm is done 
+
+
         
+# testing  
+for partition in get_partitions(load_cows('ps1_cow_data.txt').keys()):
+    if len(partition) == 2:
+        print(partition)
+
 # Problem 4
 def compare_cow_transport_algorithms():
     """
