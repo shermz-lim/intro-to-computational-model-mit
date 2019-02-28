@@ -130,17 +130,54 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # brute force implementation with memoization 
-    # recursion - split bigger list into two smaller lists (generate partition that has a length of 
-    # 2 ) with one of the list that's able to satisfy the weight limit. If both lists 
-    # can satisfy limit, algorithm is done 
+    # brute force implementation 
+
+    # set empty list of possible set of trips  
+    possible_set_of_trips = []
+
+    # generates set of all possible list of partitions with cow names 
+    for partition in get_partitions(cows.keys()):
+        
+        # keeps track of whether any trip in this list exceeds weight limit 
+        weight_exceed = False 
+
+        # loops through the trip in this list 
+        for trip in partition:
+            
+            value = 0 
+            for cow in trip:
+                value += cows[cow]
+
+            # if weight of trip exceed limit  
+            if value > limit:
+                # set weight exceed to true and break 
+                weight_exceed = True 
+                break 
+
+        # if none of the trips exceed weight limit, partition is a valid set of trips
+        if not weight_exceed:
+            # appends partition to possible set of valid trips 
+            possible_set_of_trips.append(partition)
+
+    # finds the shortest trip in the set of possible trips using linear search 
+    min_trip_len = len(possible_set_of_trips[0])
+    min_trip = possible_set_of_trips[0]
+
+    for set_of_trip in possible_set_of_trips:
+        if len(set_of_trip) < min_trip_len:
+            min_trip_len = len(set_of_trip)
+            min_trip = set_of_trip
+
+    # return list of lists containing the minimal number of trips 
+    return min_trip                     
+
 
 
         
 # testing  
-for partition in get_partitions(load_cows('ps1_cow_data.txt').keys()):
-    if len(partition) == 2:
-        print(partition)
+
+
+print(brute_force_cow_transport(load_cows('ps1_cow_data.txt')))
 
 # Problem 4
 def compare_cow_transport_algorithms():
