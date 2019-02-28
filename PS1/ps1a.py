@@ -210,3 +210,11 @@ def compare_cow_transport_algorithms():
 
 if __name__ == "__main__":
     compare_cow_transport_algorithms()
+
+# algorithm analysis:
+# greedy algorithm ran faster as it doesn't consider all possible cases 
+# greedy algorithm doesn't return the optimal solution. it makes the locally optimal decision 
+# at each point but does not necessarily return the global optimal solution 
+# 
+# brute force algorithm returns the optimal solution. all possible partitions are considered 
+# and the best one (shortest number of trips) returned 
