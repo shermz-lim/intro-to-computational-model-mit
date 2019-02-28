@@ -172,13 +172,6 @@ def brute_force_cow_transport(cows,limit=10):
     return min_trip                     
 
 
-
-        
-# testing  
-
-
-print(brute_force_cow_transport(load_cows('ps1_cow_data.txt')))
-
 # Problem 4
 def compare_cow_transport_algorithms():
     """
@@ -193,5 +186,27 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
-    pass
+    
+    # load cow data
+    cows = load_cows('ps1_cow_data.txt')
+
+    # loops through each algorithm 
+    for algorithm in [greedy_cow_transport, brute_force_cow_transport]:
+        if algorithm == greedy_cow_transport:
+            algo_name = "Greedy"
+        else:
+            algo_name = "Brute Force"    
+
+        # measure time taken to implement the algorithm 
+        start = time.time()
+        trips_list = algorithm(cows)
+        end = time.time()
+        time_taken = end - start 
+
+        print("Algorithm: {}\nMinimum number of trips: {}\nList of trips: {}\
+            \nTime taken: {}\n".format(algo_name, len(trips_list), trips_list, time_taken))
+
+            
+
+if __name__ == "__main__":
+    compare_cow_transport_algorithms()
