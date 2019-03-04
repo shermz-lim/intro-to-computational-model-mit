@@ -9,6 +9,7 @@
 # Part B: Golden Eggs
 #================================
 
+
 # Problem 1
 def dp_make_weight(egg_weights, target_weight, memo = {}):
     """
@@ -22,8 +23,36 @@ def dp_make_weight(egg_weights, target_weight, memo = {}):
     
     Returns: int, smallest number of eggs needed to make target weight
     """
-    # TODO: Your code here
-    pass
+    
+    # base case
+    if target_weight in egg_weights:
+        return 1
+
+    smallest_num_eggs = float('inf')
+
+    # recursive case: 1 branch for each diff. egg weights 
+    for weight in egg_weights:
+        remaining_weight = target_weight - weight 
+        print(remaining_weight)
+
+        # only enter branch if remaining weight can be fulfilled by egg weights 
+        if remaining_weight > 0:
+            
+            try:
+                # checks whether recursive solution is already in memo 
+                recursive_num_eggs = memo[remaining_weight]
+            except KeyError:
+                recursive_num_eggs = dp_make_weight(egg_weights, remaining_weight, memo)  
+                memo[target_weight] = (recursive_num_eggs + 1)
+
+            if recursive_num_eggs < smallest_num_eggs:
+                smallest_num_eggs = recursive_num_eggs    
+
+    return (smallest_num_eggs + 1)
+
+
+
+
 
 # EXAMPLE TESTING CODE, feel free to add more if you'd like
 if __name__ == '__main__':
@@ -33,4 +62,3 @@ if __name__ == '__main__':
     print("n = 99")
     print("Expected ouput: 9 (3 * 25 + 2 * 10 + 4 * 1 = 99)")
     print("Actual output:", dp_make_weight(egg_weights, n))
-    print()
