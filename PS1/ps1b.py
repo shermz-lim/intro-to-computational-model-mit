@@ -66,3 +66,18 @@ if __name__ == '__main__':
     print("n = 99")
     print("Expected ouput: 9 (3 * 25 + 2 * 10 + 4 * 1 = 99)")
     print("Actual output:", dp_make_weight(egg_weights, n))
+
+
+# Problem B2: write-up
+
+# 1. if there were 30 different egg weights, there will be an exponential increase 
+# in the number of recursive calls which results in an exponential increase in 
+# runtime 
+
+# 2. The objective would be to pick the egg with greatest weight at each stage. 
+# Greedy function: minimise no. of eggs. Constraints - weight limit cannot be exceeded.
+# Pick the egg with highest weight as long as it is below the target weight. 
+
+# 3. Yes. It will not return the optimal solution when 1 is not one of the 
+# egg weights. Having an egg with weight of 1 ensures that the optimal solution is 
+# always derived at by following the greedy algorithm. 
