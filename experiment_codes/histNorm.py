@@ -46,6 +46,7 @@ def makePlots(numFlips1, numFlips2, numTrials):
     pylab.xlim(xmin, xmax)
     labelPlot(numFlips2, numTrials, mean2, sd2)
 
-random.seed(0)
-makePlots(100,1000,100000)
-pylab.show()
+if __name__ == "__main__":    
+    random.seed(0)
+    makePlots(100,1000,100000)
+    pylab.show()

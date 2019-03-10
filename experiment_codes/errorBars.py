@@ -21,4 +21,5 @@ def showErrorBars(minExp, maxExp, numTrials):
     pylab.ylabel('Fraction of heads & 95% confidence')
     pylab.show()
 
-showErrorBars(3, 10, 100)    
+if __name__ == "__main__":
+    showErrorBars(3, 10, 100)    
