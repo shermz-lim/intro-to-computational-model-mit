@@ -55,16 +55,20 @@ class Edge(object):
 
 class WeightedEdge(Edge):
     def __init__(self, src, dest, total_distance, outdoor_distance):
-        pass  # TODO
+        Edge.__init__(self, src, dest)
+        self.total_distance = total_distance
+        self.outdoor_distance = outdoor_distance
 
     def get_total_distance(self):
-        pass  # TODO
+        return self.total_distance
 
     def get_outdoor_distance(self):
-        pass  # TODO
+        return self.outdoor_distance
 
     def __str__(self):
-        pass  # TODO
+        string = "{}->{} ({}, {})".format(self.src, self.dest,
+        self.total_distance, self.outdoor_distance)
+        return string
 
 
 class Digraph(object):
