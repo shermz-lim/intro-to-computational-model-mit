@@ -20,7 +20,8 @@ from graph import Digraph, Node, WeightedEdge
 # represented?
 #
 # Answer:
-#
+# Nodes represent the building numbers while the edges represent
+# the outdoor distance. 
 
 
 # Problem 2b: Implementing load_map
