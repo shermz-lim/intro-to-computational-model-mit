@@ -21,7 +21,8 @@ from graph import Digraph, Node, WeightedEdge
 #
 # Answer:
 # Nodes represent the building numbers while the edges represent
-# the outdoor distance. 
+# the outdoor distance. the distances are represented in the edge
+# objects 
 
 
 # Problem 2b: Implementing load_map
@@ -44,12 +45,55 @@ def load_map(map_filename):
         a Digraph representing the map
     """
 
-    # TODO
     print("Loading map from file...")
+    mapFileObj = open(map_filename, 'r')
+
+    # init Digraph object 
+    graph = Digraph()
+
+    # obtaining individual entry from text file 
+    for entry in mapFileObj.read().split('\n'):
+
+        entryList = entry.split(' ')
+        # obtaining info from entry 
+        source = entryList[0]
+        destination = entryList[1]
+        total_dist = entryList[2]
+        outdoor_dist = entryList[3]
+
+        # create nodes 
+        sourceNode = Node(source)
+        destNode = Node(destination)
+
+
+        # add nodes to graph 
+        try:
+            graph.add_node(sourceNode)
+        except ValueError:
+            pass
+        try:
+            graph.add_node(destNode)
+        except ValueError:
+            pass
+
+        # create and add edge to graph 
+        edge = WeightedEdge(sourceNode, destNode, total_dist, outdoor_dist)
+        graph.add_edge(edge)
+         
+    mapFileObj.close()     
+    return graph 
+
+
+        
+        
+
 
 # Problem 2c: Testing load_map
 # Include the lines used to test load_map below, but comment them out
 
+# if __name__ == "__main__":
+#     graph = load_map('test_load_map.txt')
+#     print(graph)
 
 #
 # Problem 3: Finding the Shorest Path using Optimized Search Method
