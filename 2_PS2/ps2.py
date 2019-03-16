@@ -83,17 +83,14 @@ def load_map(map_filename):
     mapFileObj.close()     
     return graph 
 
-
-        
-        
-
-
 # Problem 2c: Testing load_map
 # Include the lines used to test load_map below, but comment them out
 
 # if __name__ == "__main__":
 #     graph = load_map('test_load_map.txt')
 #     print(graph)
+
+
 
 #
 # Problem 3: Finding the Shorest Path using Optimized Search Method
@@ -102,8 +99,11 @@ def load_map(map_filename):
 #
 # What is the objective function for this problem? What are the constraints?
 #
-# Answer:
-#
+# Answer: The objective funciton is to minimize the total distance travelled.
+# The constraint is that the outdoor distance travelled cannot exceed the maximum
+# distance outdoors. 
+
+
 
 # Problem 3b: Implement get_best_path
 def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
