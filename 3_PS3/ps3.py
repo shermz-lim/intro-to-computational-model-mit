@@ -81,7 +81,13 @@ class RectangularRoom(object):
         height: an integer > 0
         dirt_amount: an integer >= 0
         """
-        raise NotImplementedError
+        # initialize variables
+        self.width = width 
+        self.height = height 
+        self.dirt_amount = dirt_amount
+
+        # form 2D array of tiles 
+        self.tiles = [[dirt_amount for _ in range(height)] for _ in range(width)]
     
     def clean_tile_at_position(self, pos, capacity):
         """
@@ -96,7 +102,12 @@ class RectangularRoom(object):
         Note: The amount of dirt on each tile should be NON-NEGATIVE.
               If the capacity exceeds the amount of dirt on the tile, mark it as 0.
         """
-        raise NotImplementedError
+        x, y = pos.get_x(), pos.get_y()
+        dirt_left = self.tiles[x][y] - capacity
+        if dirt_left <= 0:
+            self.tiles[x][y] = 0
+        else:
+            self.tiles[x][y] = dirt_left    
 
     def is_tile_cleaned(self, m, n):
         """
@@ -112,13 +123,20 @@ class RectangularRoom(object):
         Note: The tile is considered clean only when the amount of dirt on this
               tile is 0.
         """
-        raise NotImplementedError
+        if self.tiles[m][n] == 0:
+            return True
+        return False     
 
     def get_num_cleaned_tiles(self):
         """
         Returns: an integer; the total number of clean tiles in the room
         """
-        raise NotImplementedError
+        num_clean = 0 
+        for row in self.tiles:
+            for tile in row:
+                if tile == 0:
+                    num_clean += 1 
+        return num_clean            
         
     def is_position_in_room(self, pos):
         """
@@ -127,7 +145,12 @@ class RectangularRoom(object):
         pos: a Position object.
         Returns: True if pos is in the room, False otherwise.
         """
-        raise NotImplementedError
+        # gets coordinates of pos 
+        x, y = pos.get_x(), pos.get_y()
+        # checks if coordinates are within width and height of room 
+        if x < self.width and y < self.height:
+            return True 
+        return False     
         
     def get_dirt_amount(self, m, n):
         """
@@ -140,7 +163,7 @@ class RectangularRoom(object):
 
         Returns: an integer
         """
-        raise NotImplementedError
+        return self.tiles[m][n]
         
     def get_num_tiles(self):
         """
