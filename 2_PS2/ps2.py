@@ -140,8 +140,20 @@ def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
         If there exists no path that satisfies max_total_dist and
         max_dist_outdoors constraints, then return None.
     """
-    # TODO
-    pass
+    
+    if not digraph.has_node(start) or not digraph.has_node(end):
+        raise ValueError("Node is not in digraph.")
+    elif start == end:
+        return path[0] + [start]
+    else:
+        for digraph.get_edges_for_node(Node(start)):
+            pass
+        
+
+
+
+    
+    
 
 
 # Problem 3c: Implement directed_dfs
