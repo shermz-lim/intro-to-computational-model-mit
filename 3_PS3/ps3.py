@@ -148,7 +148,7 @@ class RectangularRoom(object):
         # gets coordinates of pos 
         x, y = pos.get_x(), pos.get_y()
         # checks if coordinates are within width and height of room 
-        if x < self.width and y < self.height:
+        if (x > 0 and x < self.width) and (y > 0 and y < self.height):
             return True 
         return False     
         
@@ -399,11 +399,22 @@ class StandardRobot(Robot):
         rotate once to a random new direction, and stay stationary) and clean the dirt on the tile
         by its given capacity. 
         """
-        raise NotImplementedError
+        # obtain new position 
+        new_pos = self.position.get_new_position(self.direction, self.speed)
+        # checks whether new position is valid 
+        if self.room.is_position_valid(new_pos):
+            # move robot to new position and clean tile 
+            self.set_robot_position(new_pos)
+            self.room.clean_tile_at_position(new_pos, self.capacity)
+        else:
+            # obtain new direction and set robot's direction to new direction
+            new_dir = self.get_robot_direction()
+            self.set_robot_direction(new_dir)
+
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-#test_robot_movement(StandardRobot, EmptyRoom)
-#test_robot_movement(StandardRobot, FurnishedRoom)
+# test_robot_movement(StandardRobot, EmptyRoom)
+# test_robot_movement(StandardRobot, FurnishedRoom)
 
 # === Problem 4
 class FaultyRobot(Robot):
