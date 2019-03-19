@@ -454,10 +454,17 @@ class FaultyRobot(Robot):
         StandardRobot at this time-step (checking if it can move to a new position,
         move there if it can, pick a new direction and stay stationary if it can't)
         """
-        raise NotImplementedError
+        if self.gets_faulty():
+            # obtain new direction and set robot's direction to new direction
+            new_dir = self.get_robot_direction()
+            self.set_robot_direction(new_dir)
+        else:
+            # behave like standard robot 
+            StandardRobot.update_position_and_clean(self)
+
         
     
-#test_robot_movement(FaultyRobot, EmptyRoom)
+# test_robot_movement(FaultyRobot, EmptyRoom)
 
 # === Problem 5
 def run_simulation(num_robots, speed, capacity, width, height, dirt_amount, min_coverage, num_trials,
